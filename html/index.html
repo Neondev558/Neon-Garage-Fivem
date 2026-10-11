@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Garage</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="garage" id="garage" hidden>
+    <div class="backdrop"></div>
+
+    <div class="shell">
+        <header class="bar">
+            <img class="bar-logo" id="garageLogo" alt="" hidden>
+            <div class="bar-title">
+                <span class="bar-kicker" id="garageKicker"></span>
+                <h1 id="garageTitle"></h1>
+            </div>
+            <div class="bar-count">
+                <b id="vehicleCount">00</b>
+                <span>araç</span>
+            </div>
+            <button class="close" id="closeBtn" type="button" aria-label="Kapat">
+                <span>ESC</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12"/><path d="M18 6L6 18"/></svg>
+            </button>
+        </header>
+
+        <aside class="list-pane">
+            <label class="search">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg>
+                <input id="searchInput" type="text" placeholder="Araç, marka ya da plaka ara" autocomplete="off" spellcheck="false">
+            </label>
+
+            <div class="filters" id="filters">
+                <button class="filter is-active" type="button" data-filter="all">Tümü</button>
+                <button class="filter" type="button" data-filter="in">Garajda</button>
+                <button class="filter" type="button" data-filter="out">Dışarıda</button>
+            </div>
+
+            <ul class="vehicle-list" id="vehicleList"></ul>
+            <p class="list-empty" id="listEmpty" hidden>Aramana uyan araç yok.</p>
+        </aside>
+
+        <main class="detail" id="detail">
+            <div class="stage">
+                <div class="stage-grid"></div>
+                <div class="stage-glow"></div>
+                <span class="stage-plate" id="detailPlate"></span>
+                <img class="stage-car" id="detailImage" alt="">
+                <div class="stage-floor"></div>
+            </div>
+
+            <div class="heading">
+                <div class="heading-text">
+                    <span class="heading-brand" id="detailBrand"></span>
+                    <h2 id="detailName"></h2>
+                </div>
+                <span class="status" id="detailStatus"><i></i><b></b></span>
+            </div>
+
+            <div class="stats">
+                <div class="stat">
+                    <div class="stat-head">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10h3l2-3h6v3h3l2 3v4h-3v2H9l-2-3H4z"/><path d="M12 4v3"/><path d="M10 4h4"/></svg>
+                        <span>Motor</span>
+                        <b id="statEngine">0%</b>
+                    </div>
+                    <div class="meter"><i id="meterEngine"></i></div>
+                </div>
+                <div class="stat">
+                    <div class="stat-head">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 14l2-5a2 2 0 0 1 1.9-1.3h10.2A2 2 0 0 1 19 9l2 5v4h-2.5"/><path d="M5.5 18H3v-4h18"/><circle cx="7.5" cy="18" r="1.8"/><circle cx="16.5" cy="18" r="1.8"/><path d="M9.3 18h5.4"/></svg>
+                        <span>Kaporta</span>
+                        <b id="statBody">0%</b>
+                    </div>
+                    <div class="meter"><i id="meterBody"></i></div>
+                </div>
+                <div class="stat">
+                    <div class="stat-head">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 20V6a2 2 0 0 1 2-2h5a2 2 0 0 1 2 2v14"/><path d="M4 20h11"/><path d="M7.5 8h4v3h-4z"/><path d="M14 10h2a2 2 0 0 1 2 2v4a1.5 1.5 0 0 0 3 0V9l-2.5-2.5"/></svg>
+                        <span>Yakıt</span>
+                        <b id="statFuel">0%</b>
+                    </div>
+                    <div class="meter"><i id="meterFuel"></i></div>
+                </div>
+            </div>
+
+            <div class="actions">
+                <button class="primary" id="spawnBtn" type="button">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13"/><path d="M13 6l6 6-6 6"/></svg>
+                    <span>Aracı Çıkar</span>
+                </button>
+
+                <div class="action-card" id="transferCard">
+                    <span class="action-label">Devret</span>
+                    <div class="action-row">
+                        <input id="transferInput" type="number" min="1" placeholder="Oyuncu ID" inputmode="numeric">
+                        <button class="ghost" id="transferBtn" type="button">Devret</button>
+                    </div>
+                </div>
+
+                <div class="action-card" id="sellCard">
+                    <span class="action-label">Sat</span>
+                    <div class="action-row">
+                        <b class="price" id="detailPrice"></b>
+                        <button class="ghost ghost-danger" id="sellBtn" type="button">Sat</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div class="toast" id="toast" hidden></div>
+</div>
+
+<script src="config.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
